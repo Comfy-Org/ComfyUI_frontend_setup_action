@@ -54,7 +54,7 @@ runs:
       working-directory: ComfyUI_frontend
     - name: Start ComfyUI server
       run: |
-        python main.py --cpu ${{ inputs.extra_params }} &
+        python main.py --cpu --multi-user ${{ inputs.extra_params }} &
         wait-for-it --service 127.0.0.1:8188 -t 600
       working-directory: ComfyUI
       shell: bash
