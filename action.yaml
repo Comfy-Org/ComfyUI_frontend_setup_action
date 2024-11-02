@@ -1,5 +1,10 @@
 name: Setup
 description: 'Setup ComfyUI frontend'
+inputs:
+  extra_server_params:
+    description: 'Additional parameters to pass to ComfyUI server'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -49,7 +54,7 @@ runs:
       working-directory: ComfyUI_frontend
     - name: Start ComfyUI server
       run: |
-        python main.py --cpu &
+        python main.py --cpu ${{ inputs.extra_params }} &
         wait-for-it --service 127.0.0.1:8188 -t 600
       working-directory: ComfyUI
       shell: bash
