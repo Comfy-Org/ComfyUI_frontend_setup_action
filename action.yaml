@@ -5,6 +5,10 @@ inputs:
     description: 'Additional parameters to pass to ComfyUI server'
     required: false
     default: ''
+  devtools_ref:
+    description: 'Reference to use for ComfyUI_devtools'
+    required: false
+    default: 'main'
 runs:
   using: 'composite'
   steps:
@@ -24,12 +28,7 @@ runs:
       with:
         repository: 'Comfy-Org/ComfyUI_devtools'
         path: 'ComfyUI/custom_nodes/ComfyUI_devtools'
-    - name: Checkout ComfyUI_examples
-      uses: actions/checkout@v4
-      with:
-        repository: 'comfyanonymous/ComfyUI_examples'
-        path: 'ComfyUI_frontend/tests-ui/ComfyUI_examples'
-        ref: master
+        ref: ${{ inputs.devtools_ref }}
     - uses: actions/setup-node@v3
       with:
         node-version: lts/*
